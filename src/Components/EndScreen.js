@@ -1,27 +1,20 @@
-
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { QuizContext } from '../Helpers/Context';
-import { Questions } from "../Helpers/QuestionBank"
-import "../App.css";
 
+function EndScreen() {
+  const { score, setScore, setGameState } = useContext(QuizContext);
 
-function EndScreen () {
+  const restartQuiz = () => {
+    setScore(0);
+    setGameState('menu');
+  };
 
-    const {score, setScore, setGameState} = useContext(QuizContext);
-
-    const restartQuiz = () => {
-        setScore (0);
-        setGameState("menu");
-
-    }
-
-    return <div className='EndScreen'>
-        {""}
-        <h1>Quiz finished</h1>
-        <h3>{score} / {Questions.length}</h3>
-        <button onClick={restartQuiz}> Restart Quiz</button>
+  return (
+    <div className='EndScreen'>
+      <h2>Your Score: {score}</h2>
+      <button onClick={restartQuiz}>Restart Quiz</button>
     </div>
-
-};
+  );
+}
 
 export default EndScreen;

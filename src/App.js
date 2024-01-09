@@ -1,25 +1,21 @@
-
-import './App.css';
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import MainMenu from './Components/MainMenu';
 import Quiz from './Components/Quiz';
 import EndScreen from './Components/EndScreen';
+import Register from './Components/Register';
 import { QuizContext } from './Helpers/Context';
-
+import './App.css';
 
 function App() {
-  const [gameState, setGameState] = useState("menu");
-  const [score, setScore] = useState(0)
+  const { gameState } = useContext(QuizContext);
 
   return (
     <div className='App'>
-    <h1>Quizz App</h1>
-    <QuizContext.Provider value ={{gameState, setGameState, score, setScore}}>
-      {gameState === "menu" && <MainMenu />}
-      {gameState === "quiz" && <Quiz />}
-      {gameState === "endScreen" && <EndScreen />}
-    </QuizContext.Provider>
-
+      <h1>Quiz App</h1>
+      {gameState === 'menu' && <MainMenu />}
+      {gameState === 'quiz' && <Quiz />}
+      {gameState === 'endScreen' && <EndScreen />}
+      {gameState === 'register' && <Register />}
     </div>
   );
 }

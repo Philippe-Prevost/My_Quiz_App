@@ -5,7 +5,7 @@ export const Questions = [
         optionB: "Amazon",
         optionC: "Yangtze",
         optionD: "Mississippi",
-        Answer: "A",
+        answer: "A",
     },
     {
         prompt: "What is the capital of Thailand",
