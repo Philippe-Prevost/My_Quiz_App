@@ -1,9 +1,11 @@
-// Register.js
-
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from "../axiosConfig"; 
+import { QuizContext } from '../Helpers/Context';
 
-const Register = ({ setGameState }) => {
+
+
+const Register = () => {
+  const { setGameState } = useContext(QuizContext);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,8 +38,8 @@ const Register = ({ setGameState }) => {
   };
 
   return (
-    <div className='container'>
-      <form className='form-container' onSubmit={handleSubmit}>
+    <div className='register-container'>
+      <form className='register-form' onSubmit={handleSubmit}>
         <h1>Register User</h1>
         <label>
           <input
