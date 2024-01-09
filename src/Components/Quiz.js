@@ -2,8 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { QuizContext } from '../Helpers/Context';
 import { Questions } from '../Helpers/QuestionBank';
 
-
-
 function Quiz() {
   const { setGameState, setScore } = useContext(QuizContext);
   const [currQuestion, setCurrQuestion] = useState(0);

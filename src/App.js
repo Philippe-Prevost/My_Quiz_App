@@ -1,22 +1,31 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainMenu from './Components/MainMenu';
 import Quiz from './Components/Quiz';
 import EndScreen from './Components/EndScreen';
 import Register from './Components/Register';
-import { QuizContext } from './Helpers/Context';
+import Login from './Components/login'; 
+import { QuizProvider } from './Helpers/Context'; 
+
 import './App.css';
 
-function App() {
-  const { gameState } = useContext(QuizContext);
 
+function App() {
   return (
-    <div className='App'>
-      <h1>Quiz App</h1>
-      {gameState === 'menu' && <MainMenu />}
-      {gameState === 'quiz' && <Quiz />}
-      {gameState === 'endScreen' && <EndScreen />}
-      {gameState === 'register' && <Register />}
-    </div>
+    <Router>
+      <QuizProvider> {}
+        <div className='App'>
+          <h1>Quiz App</h1>
+          <Routes>
+            <Route path="/" element={<MainMenu />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/endScreen" element={<EndScreen />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} /> {}
+          </Routes>
+        </div>
+      </QuizProvider>
+    </Router>
   );
 }
 

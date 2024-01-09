@@ -2,8 +2,6 @@ import React, { useState, useContext } from 'react';
 import axios from "../axiosConfig"; 
 import { QuizContext } from '../Helpers/Context';
 
-
-
 const Register = () => {
   const { setGameState } = useContext(QuizContext);
   const [username, setUsername] = useState("");
@@ -17,11 +15,9 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await axios.get("/users");
-      const user = checkEmail(res.data, email);
+    const user = await axios
+        .get("/users")
+        .then((res) => checkEmail(res.data,email));
 
       if (user) {
         setError("User already exists!");
@@ -31,11 +27,8 @@ const Register = () => {
         alert("User created!");
         setGameState('quiz'); 
       }
-    } catch (error) {
-      console.error("Error creating user:", error);
-      setError(`Error creating user: ${error.message}`);
-    }
-  };
+    } 
+  
 
   return (
     <div className='register-container'>

@@ -1,17 +1,12 @@
-import React, { useContext } from 'react';
-import { QuizContext } from '../Helpers/Context';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function MainMenu() {
-  const { setGameState } = useContext(QuizContext);
-
   return (
     <div className='Menu'>
-      <button onClick={() => setGameState('quiz')}>
-        Start Quiz
-      </button>
-      <button onClick={() => setGameState('register')}>
-        Register
-      </button>
+      <Link to="/quiz" className='quizButton'>Start Quiz</Link>
+      <Link to="/register" className='quizButton'>Register</Link>
+      <Link to="/login" className='quizButton'>Login</Link>
     </div>
   );
 }

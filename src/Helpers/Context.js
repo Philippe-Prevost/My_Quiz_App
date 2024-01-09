@@ -1,5 +1,3 @@
-// Context.js
-
 import { createContext, useState } from 'react';
 
 export const QuizContext = createContext({
