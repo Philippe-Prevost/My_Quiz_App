@@ -6,6 +6,7 @@ import EndScreen from './Components/EndScreen';
 import Register from './Components/Register';
 import Login from './Components/login';
 import { QuizProvider } from './Helpers/Context';
+import { Link } from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
     <Router>
       <QuizProvider>
         <div className='App'>
-          <h1>Quiz App</h1>
+        <Link to="/menu" className='QuizAppH1'><h1>Quiz App</h1></Link>
           <Routes>
             <Route path="/" element={<MainMenu />} />
             <Route path="/quiz" element={<Quiz />} />

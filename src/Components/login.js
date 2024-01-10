@@ -9,9 +9,10 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+  
     try {
       const response = await axios.post('/login', { email, password });
       
@@ -26,6 +27,7 @@ const Login = () => {
       setError('Error logging in. Please try again.');
     }
   };
+  
 
   return (
     <div className="login-container">
