@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { QuizContext } from '../Helpers/Context';
 import { Questions } from '../Helpers/QuestionBank';
+import { useNavigate } from 'react-router-dom';
 
 function Quiz() {
   const { setGameState, setScore } = useContext(QuizContext);
   const [currQuestion, setCurrQuestion] = useState(0);
   const [optionChosen, setOptionChosen] = useState('');
+  const navigate = useNavigate();
 
   const handleNextQuestion = () => {
     const correctAnswer = Questions[currQuestion].answer;
@@ -18,6 +20,7 @@ function Quiz() {
       setCurrQuestion((prevQuestion) => prevQuestion + 1);
     } else {
       setGameState('endScreen');
+      navigate('/endScreen'); 
     }
   };
 

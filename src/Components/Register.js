@@ -1,47 +1,41 @@
 import React, { useState, useContext } from 'react';
 import axios from "../axiosConfig"; 
 import { QuizContext } from '../Helpers/Context';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const { setGameState } = useContext(QuizContext);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const checkEmail = (users, emailToCheck) => {
-    const user = users.find((user) => user.email === emailToCheck);
-    return user;
-  };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    const user = await axios
-        .get("/users")
-        .then((res) => checkEmail(res.data,email));
+    e.preventDefault();
 
-      if (user) {
+    try {
+      const userExists = await axios.get("/users")
+        .then((res) => res.data.some((user) => user.email === email));
+
+      if (userExists) {
         setError("User already exists!");
       } else {
-        const newUser = { username, email, password };
+        const newUser = { email, password };
         await axios.post("/users", newUser);
         alert("User created!");
-        setGameState('quiz'); 
+        setGameState('menu');
+        navigate('/');
       }
-    } 
-  
+    } catch (error) {
+      console.error('Error registering:', error);
+      setError('Error registering user. Please try again.');
+    }
+  };
 
   return (
     <div className='register-container'>
       <form className='register-form' onSubmit={handleSubmit}>
         <h1>Register User</h1>
-        <label>
-          <input
-            type='text'
-            placeholder='Name'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
         <label>
           <input
             type='text'
